@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mood Jukebox</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Mood Jukebox</h1>
+    <label for="mood">Choose a mood:</label>
+    <select id="mood">
+        <option value="happy">Happy</option>
+        <option value="sad">Sad</option>
+        <option value="confident">Confident</option>
+        <option value="relaxed">Relaxed</option>
+    </select>
+    <button onclick="loadSongs()">Show Songs</button>
+    <div id="results"></div>
+
+    <script>
+        async function loadSongs() {
+            const mood = document.getElementById("mood").value;
+            const response = await fetch("/songs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({mood: mood})
+            });
+            const data = await response.json();
+            console.log(data)
+            const results = document.getElementById("results");
+            results.innerHTML = "";
+            data.forEach(song => {
+                results.innerHTML += `<p>${song.title} by ${song.artist}</p>`;
+            });
+        }
+    </script>
+</body>
+</html>

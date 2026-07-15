@@ -1,0 +1,15 @@
+body {
+    font-family: sans-serif;
+    background: #f0f0f0;
+    text-align: center;
+    padding: 50px;
+}
+
+select, button {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+#results {
+    margin-top: 20px;
+}
